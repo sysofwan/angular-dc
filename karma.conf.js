@@ -15,8 +15,8 @@ module.exports = function(config) {
             'bower_components/lodash/dist/lodash.js',
             'bower_components/crossfilter/crossfilter.js',
             'bower_components/d3/d3.js',
-            'bower_components/dcjs/dc.js',
-            'bower_components/dcjs/dc.css',
+            'bower_components/dc.js/dc.js',
+            'bower_components/dc.js/dc.css',
             'src/*.js',
             'test/spec/*.js'
         ],
