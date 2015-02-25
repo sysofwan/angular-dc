@@ -1,4 +1,5 @@
 'use strict';
+/* global crossfilter */
 
 describe('Module: angularDc', function () {
   var scope, $sandbox, $compile, $timeout;
@@ -20,18 +21,19 @@ describe('Module: angularDc', function () {
   });
 
   var cf = crossfilter();
-  var d = cf.dimension(function(){return "test"});
-  var g = d.group(function(){return "bar"});
+  var d = cf.dimension(function(){return 'test';});
+  var g = d.group(function(){return 'bar';});
   var templates = {
     'default': {
       scope: {d:d, g:g},
-      element: '<div width="200" config="222" dc-chart="pieChart" dimension="d" group="g"></div>'
+      element: '<div dc-width="200" dc-config="222" dc-chart="pieChart" dc-dimension="d" dc-group="g"></div>'
     }
   };
 
   function compileDirective(template) {
     template = template ? templates[template] : templates['default'];
     angular.extend(scope, template.scope || templates['default'].scope);
+
     var $element = $(template.element).appendTo($sandbox);
     $element = $compile($element)(scope);
     scope.$digest();
