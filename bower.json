@@ -21,6 +21,7 @@
     "karma.conf.js",
     "test",
     "src",
-    "package.json"
+    "package.json",
+    "index.html"
   ]
 }

@@ -21,6 +21,7 @@ angularDc.directive('dcChart', ['$timeout',
             'postSetupChart'
         ];
 
+        var innerFuncs = ['xAxis', 'yAxis'];
 
         /* Called during the directive's linking phase, this function creates
        a Dc.js chart. The chart is configured based on settings read from
@@ -69,8 +70,13 @@ angularDc.directive('dcChart', ['$timeout',
                 scope[options.name] = chart;
                 options.name = undefined;
             }
-            // Configure the chart based on options
-            chart.options(options);
+            // Configure the chart based on options, omiting any values is assinged in inner functions
+            chart.options(_.omit(options, innerFuncs));
+            
+            // call inner functions as specified by passed in objects (for now only for xAxis and yAxis)
+            processInnerFuncs(chart, options);
+
+
 
             // Get event handlers, if any, from options
             var eventHandlers = _({
@@ -122,6 +128,23 @@ angularDc.directive('dcChart', ['$timeout',
                 .zipObject()
                 .value();
         }
+
+        function processInnerFuncs(chart, options) {
+            _(options)
+            .pick(innerFuncs)
+            .each(function(value, outer) {
+                if (chart[outer]) {
+                    var func = chart[outer]();
+                    _.each(value, function(value, inner) {
+                        if (func[inner]) {
+                            func[inner](value);
+                        }
+                    });
+                }
+            })
+            .value();
+        }
+        
         return {
             restrict: 'A',
             link: function(scope, iElement, iAttrs) {

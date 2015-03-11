@@ -26,7 +26,7 @@ describe('Module: angularDc', function () {
   var templates = {
     'default': {
       scope: {d:d, g:g},
-      element: '<div dc-width="200" dc-config="222" dc-chart="pieChart" dc-dimension="d" dc-group="g"></div>'
+      element: '<div dc-width="200" dc-config="222" dc-chart="barChart" dc-dimension="d" dc-group="g" dc-x="d3.scale.linear().domain([-2500, 2500])" dc-x-axis="{tickValues:[0]}"></div>'
     }
   };
 
