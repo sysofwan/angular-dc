@@ -14,5 +14,13 @@
   },
   "resolutions": {
     "crossfilter": "~1.3.0"
-  }
+  },
+  "ignore": [
+    ".*",
+    "Gruntfile.js",
+    "karma.conf.js",
+    "test",
+    "src",
+    "package.json"
+  ]
 }
